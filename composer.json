@@ -1,5 +1,5 @@
 {
-    "name": "iamarunp/Laraveldbtransactions",
+    "name": "iamarunp/laraveldbtransactions",
     "description": "The package can be used to handle DB transaction through a middleware.",
     "type": "middleware",
     "license": "MIT",
