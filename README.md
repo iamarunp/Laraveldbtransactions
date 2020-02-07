@@ -1,4 +1,9 @@
 This package introduces the simplest way, you can achieve the database transaction without making your code complex, without making a lot of changes.the middleware can be used for individual routes or for a route group ,if an exception occurs then it will rollback from the Terminable Middleware. While if queries getting executed successfully then the transaction gets committed. In Laravel, DB facades provide the transaction for both query builder as well as eloquent ORM.
+## Installation
+```
+        composer require iamarunp/laraveldbtransactions
+
+```
 
     The terminate method will be automatically called after the response is ready to be sent to the browser.
 The middleware is registered using TransactionServiceProvider, to use the provider, you need register the service provider.
