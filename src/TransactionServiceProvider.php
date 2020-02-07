@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraveldbtransactions;
+namespace iamarunp\Laraveldbtransactions;
 
 use Illuminate\Support\ServiceProvider;
 

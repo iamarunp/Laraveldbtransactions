@@ -203,7 +203,7 @@ file.
                                     class="php keyword">class</code><code class="php plain">,</code></div>
                             <div class="line number42 index41 alt1"><code
                                     class="php spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
-                                    class="php plain">        Laraveldbtransactions\TransactionServiceProvider::,
+                                    class="php plain">        iamarunp\Laraveldbtransactions\TransactionServiceProvider::,
 </code><code
                                     class="php keyword">class</code><code class="php plain">,</code></div>
                                     <br>

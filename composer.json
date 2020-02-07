@@ -1,5 +1,5 @@
 {
-    "name": "Laraveldbtransactions",
+    "name": "iamarunp/Laraveldbtransactions",
     "description": "The package can be used to handle DB transaction through a middleware.",
     "type": "middleware",
     "license": "MIT",
@@ -21,13 +21,13 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Laraveldbtransactions\\": "src/"
+            "iamarunp\\Laraveldbtransactions\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Laraveldbtransactions\\TransactionServiceProvider"
+                "iamarunp\\Laraveldbtransactions\\TransactionServiceProvider"
             ]
         }
     }

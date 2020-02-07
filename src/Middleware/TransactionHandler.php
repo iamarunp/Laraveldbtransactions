@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraveldbtransactions\Middleware;
+namespace iamarunp\Laraveldbtransactions\Middleware;
 
 use Closure;
 
