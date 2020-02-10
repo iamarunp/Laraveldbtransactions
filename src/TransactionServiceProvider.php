@@ -13,7 +13,12 @@ class TransactionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        app('router')->aliasMiddleware('TransactionHandler', Middleware\TransactionHandler::class);
+
+        // app('router')->aliasMiddleware('TransactionHandler', Middleware\TransactionHandler::class);
+        $this->app->singleton('TransactionHandler', function ($app) {
+            return new Middleware\TransactionHandler();
+        });
+
     }
 
     /**
@@ -23,6 +28,7 @@ class TransactionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         //
     }
 }

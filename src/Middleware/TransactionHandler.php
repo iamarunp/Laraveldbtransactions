@@ -1,6 +1,7 @@
 <?php
 
 namespace iamarunp\Laraveldbtransactions\Middleware;
+use Illuminate\Support\Facades\Log;
 
 use Closure;
 
@@ -13,8 +14,12 @@ class TransactionHandler
      * @param  \Closure  $next
      * @return mixed
      */
+    private $startTime=0;
+    private $endTime=0;
+
     public function handle($request, Closure $next)
     {
+
         $this->startTime = microtime(true);
         \DB::enableQueryLog();
 
@@ -25,6 +30,7 @@ class TransactionHandler
             \DB::rollBack();
             throw $e;
         }
+
         return $next($request);
     }
 
@@ -32,36 +38,39 @@ class TransactionHandler
     {
 
         $queries = \DB::getQueryLog();
-        if ($response instanceof Response && $response->getStatusCode() >= 500) {
+        if ($response->getStatusCode() >= 500) {
+
             \DB::rollBack();
 
+
         /*
-
-            Uncomment this section to log errors
-
             if (env('API_DATALOGGER', true)) {
-            $endTime = microtime(true);
-            $filename = 'api_datalogger_rlogger.log';
-            $dataToLog = ["Time" => gmdate("F j, Y, g:i a"),
-            "Duration" => number_format($endTime - LARAVEL_START, 3),
-            "Ip-address" => $request->ip(),
-            "Url" => $request->fullUrl(),
-            "method" => $request->method(),
-            "input" => $request->getContent(),
-            "headers" => request()->header(),
-            "response" => $response->getContent(),
-            "queries" => $queries];
+                $this->endTime = microtime(true);
 
-            $dataToLog = json_encode($dataToLog);
-
-            \File::append(storage_path('logs' . DIRECTORY_SEPARATOR . $filename), $dataToLog . "\n" . str_repeat("=", 60) . "\n\n");
+                $filename = 'middleware_logger.log';
+                $dataToLog = ["Time" => gmdate("F j, Y, g:i a"),
+                    "Duration" => number_format($this->endTime - LARAVEL_START, 3),
+                    "Ip-address" => $request->ip(),
+                    "Url" => $request->fullUrl(),
+                    "method" => $request->method(),
+                    "input" => $request->getContent(),
+                    "headers" => request()->header(),
+                    // "response" => $response->getContent(),
+                    "queries" => $queries];
+                $dataToLog = json_encode($dataToLog,JSON_PRETTY_PRINT);
+                \File::append(storage_path('logs' . DIRECTORY_SEPARATOR . $filename), $dataToLog . "\n" . str_repeat("=", 60) . "\n\n");
+                // Log::eror($dataToLog);
             }
 
         */
 
         } else {
+
             \DB::commit();
         }
+
+
+        // Log::info("Code : ".$response->getStatusCode().", time : ". number_format($this->endTime-$this->startTime, 3));
 
         return $response;
 
